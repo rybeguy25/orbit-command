@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080c0f">
+  <title>ORBIT / Deep Space Operations</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="rail" aria-label="Mission navigation">
+      <a class="brand" href="#overview" aria-label="Orbit overview">◎</a>
+      <span class="rail-line"></span>
+      <a href="#overview" class="rail-link active" aria-label="Overview">◈</a>
+      <a href="#flight" class="rail-link" aria-label="Flight telemetry">⌁</a>
+      <a href="#missions" class="rail-link" aria-label="Mission manifest">▤</a>
+      <a href="#log" class="rail-link" aria-label="Transmission log">≋</a>
+      <span class="rail-bottom">O<br>R<br>B<br>I<br>T</span>
+    </aside>
+    <main id="overview">
+      <header class="topbar">
+        <div class="wordmark">ORBIT<span>DEEP SPACE OPERATIONS</span></div>
+        <div class="top-status"><span class="status-dot"></span> SYSTEMS NOMINAL <span class="divider">/</span> <time id="clock">00:00:00 UTC</time></div>
+        <span class="operator">OPERATOR <b>01</b></span>
+      </header>
+
+      <section class="intro">
+        <div><p class="eyebrow">MISSION CONTROL / SECTOR 07</p><h1>The frontier is<br>an <em>open invitation.</em></h1><p class="intro-copy">A little further. A little stranger. Keep the signal alive.</p></div>
+        <div class="intro-meta"><span class="demo-tag">FICTIONAL SIMULATION</span><p>EXPEDITION SERIES <b>2026 / VII</b></p><p>UPLINK <b>ESTABLISHED ↗</b></p></div>
+      </section>
+
+      <section class="metrics" aria-label="Mission statistics">
+        <article class="metric"><span class="metric-label">ACTIVE VESSELS <span>01</span></span><div class="metric-value">04<span>/ 06</span></div><p><i></i> Fleet synchronized</p></article>
+        <article class="metric"><span class="metric-label">DISTANCE TRAVELED <span>02</span></span><div class="metric-value" id="distance">12.84<span>AU</span></div><p>Beyond the familiar</p></article>
+        <article class="metric"><span class="metric-label">SIGNAL INTEGRITY <span>03</span></span><div class="metric-value" id="signal">98.6<span>%</span></div><p><i></i> Deep-space relay online</p></article>
+        <article class="metric"><span class="metric-label">DISCOVERIES <span>04</span></span><div class="metric-value">127<span>+ 08</span></div><p>Things we cannot explain. Yet.</p></article>
+      </section>
+
+      <section class="operations" id="flight">
+        <article class="panel orbital-panel">
+          <div class="panel-heading"><div><p class="eyebrow">LIVE POSITION</p><h2>Somewhere, out there.</h2></div><span class="chip"><i></i> SIMULATED LIVE</span></div>
+          <div class="orbital-map" role="img" aria-label="Animated fictional orbital map with four spacecraft surrounding a central star">
+            <div class="map-grid"></div><div class="crosshair horizontal"></div><div class="crosshair vertical"></div>
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><div class="orbit orbit-four"></div>
+            <div class="star-core"></div><span class="star-label">HELIOS / 00</span>
+            <div class="orbit-carrier carrier-one"><span class="planet amber"></span></div>
+            <div class="orbit-carrier carrier-two"><span class="planet mint"></span></div>
+            <div class="orbit-carrier carrier-three"><span class="planet white"></span></div>
+            <div class="orbit-carrier carrier-four"><span class="planet violet"></span></div>
+            <div class="ship-label"><span>↗</span><div><b id="map-vessel">VOYAGER IX</b><small id="map-destination">EN ROUTE TO KEPLER-186F</small></div></div>
+            <span class="map-coordinate top-left">RA 18h 36m / DEC +38°</span><span class="map-coordinate bottom-left">LOCAL FRAME · 1:4,000,000</span><span class="map-coordinate bottom-right">N ↑</span>
+          </div>
+          <div class="map-footer"><span><i class="legend-dot"></i> EXPLORER CLASS</span><span>4 VESSELS IN VIEW</span><button id="pause-orbits" class="text-button" aria-pressed="false">PAUSE ORBITS Ⅱ</button></div>
+        </article>
+
+        <article class="panel mission-panel">
+          <div class="panel-heading"><div><p class="eyebrow">FLIGHT DIRECTOR</p><h2>Next stop: possibility.</h2></div><span class="tiny-index">02 / 04</span></div>
+          <label class="field-label" for="destination">SELECT DESTINATION</label>
+          <select id="destination"><option value="kepler">Kepler-186f / The emerald frontier</option><option value="titan">Titan / The amber sea</option><option value="europa">Europa / Beneath the ice</option><option value="proxima">Proxima b / A second sunrise</option></select>
+          <div class="destination-art"><div class="planet-large" id="destination-planet"></div><span class="planet-ring"></span><span class="destination-code" id="destination-code">K / 186F</span></div>
+          <div class="destination-details"><div><small>CLASSIFICATION</small><b id="classification">Terrestrial exoplanet</b></div><div><small>EST. TRANSIT</small><b id="transit">186 simulation days</b></div></div>
+          <div class="launch-status"><span id="phase">AWAITING YOUR COMMAND</span><b id="progress-text">0%</b></div>
+          <div class="progress-track"><div id="progress-fill"></div></div>
+          <button class="launch-button" id="launch">INITIATE EXPEDITION <span>↗</span></button>
+          <p class="mission-footnote">No actual spacecraft will be inconvenienced.</p>
+        </article>
+      </section>
+
+      <section class="bottom-grid">
+        <article class="panel telemetry-panel">
+          <div class="panel-heading"><div><p class="eyebrow">ENGINE TELEMETRY</p><h2>A steady heartbeat.</h2></div><span class="chip">ION DRIVE / ONLINE</span></div>
+          <div class="telemetry-value"><span id="velocity">28,420</span><small>KM / S <b>+ 2.4%</b></small></div>
+          <svg class="telemetry-chart" viewBox="0 0 600 130" role="img" aria-label="Decorative simulated velocity trend">
+            <defs><linearGradient id="chart-gradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#b6ebc5" stop-opacity=".22"/><stop offset="100%" stop-color="#b6ebc5" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0 100H600 M0 65H600 M0 30H600" stroke="#ffffff0d" fill="none"/>
+            <path d="M0 102 L24 100 48 107 72 92 96 97 120 82 144 86 168 67 192 76 216 61 240 69 264 50 288 58 312 42 336 52 360 36 384 44 408 30 432 40 456 19 480 30 504 18 528 26 552 12 576 20 600 9 V130 H0Z" fill="url(#chart-gradient)"/>
+            <path d="M0 102 L24 100 48 107 72 92 96 97 120 82 144 86 168 67 192 76 216 61 240 69 264 50 288 58 312 42 336 52 360 36 384 44 408 30 432 40 456 19 480 30 504 18 528 26 552 12 576 20 600 9" stroke="#b6ebc5" stroke-width="2" fill="none"/>
+          </svg><div class="chart-axis"><span>T − 60 MIN</span><span>T − 30 MIN</span><span>NOW</span></div>
+        </article>
+
+        <article class="panel manifest-panel" id="missions">
+          <div class="panel-heading"><div><p class="eyebrow">MISSION MANIFEST</p><h2>The ones who went.</h2></div><span class="tiny-index">04 VESSELS</span></div>
+          <div class="vessel"><span class="vessel-icon">↗</span><div><b>Voyager IX</b><small id="manifest-destination">Kepler-186f</small></div><span class="vessel-status" id="vessel-status">STANDBY</span></div>
+          <div class="vessel"><span class="vessel-icon">◈</span><div><b>Odyssey II</b><small>Titan orbital survey</small></div><span class="vessel-status">ORBITING</span></div>
+          <div class="vessel"><span class="vessel-icon">✳</span><div><b>Pale Blue</b><small>Europa ice mapping</small></div><span class="vessel-status amber-text">SCANNING</span></div>
+          <div class="vessel"><span class="vessel-icon">⌁</span><div><b>Still Here</b><small>Looking for the Wi-Fi</small></div><span class="vessel-status muted">SEARCHING</span></div>
+        </article>
+      </section>
+
+      <section class="panel transmission-panel" id="log"><div class="transmission-heading"><p class="eyebrow">TRANSMISSION LOG</p><button class="text-button" id="clear-log">CLEAR LOG ↗</button></div><ol id="transmissions" aria-live="polite" aria-relevant="additions"></ol></section>
+      <footer><span>ORBIT / AN EXERCISE IN UNNECESSARY AMBITION</span><span>FICTIONAL DATA. REAL CSS. QUESTIONABLE DESTINATIONS.</span></footer>
+    </main>
+  </div>
+</body>
+</html>
